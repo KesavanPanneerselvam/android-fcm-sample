@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "132258738255",
+    "project_id": "fcm-demo-jpmc",
+    "storage_bucket": "fcm-demo-jpmc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:132258738255:android:1945cde3e8bab37ee3fa3a",
+        "android_client_info": {
+          "package_name": "com.interview.fcmpushnotification"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWZEVxp15K4O7I0x1rfl-jxsndhlLiyVg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
