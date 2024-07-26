@@ -1,3 +1,4 @@
+```
 How to Create a New Project in Firebase
 Step 1: Sign in to Firebase
 Open your web browser and go to Firebase Console.
@@ -62,3 +63,4 @@ Set up Firebase Cloud Messaging for push notifications.
 Use Firebase Hosting if you are deploying a web app.
 Conclusion
 Following these steps, you should be able to successfully create a new project in Firebase and integrate it with your app. For more detailed instructions and troubleshooting, refer to the Firebase Documentation.
+```
