@@ -92,4 +92,52 @@ Add a document with fields title, body, and token (token refers to the device's 
 Check logs for the function:
 
 In the Firebase Console, go to "Functions" and check the logs to see if the push notification was sent successfully.
+
+
+
+
+
+
+
+/**
+ * Import function triggers from their respective submodules:
+ *
+ * const {onCall} = require("firebase-functions/v2/https");
+ * const {onDocumentWritten} = require("firebase-functions/v2/firestore");
+ *
+ * See a full list of supported triggers at https://firebase.google.com/docs/functions
+ */
+
+const functions = require('firebase-functions');
+const admin = require('firebase-admin');
+admin.initializeApp();
+
+exports.sendFCMNotifications = functions.firestore.document('NotificationCenter/{userId}').onCreate(
+  async (snapshot) => {  
+  	console.log('Triggered Notification function');
+  	const title = snapshot.data().title;
+  	const message = snapshot.data().message;
+  	const userId = snapshot.data().userId;
+    console.log('Notification function step 1 - '+ userId);
+    const payload = {
+      notification: {
+        title: title,
+        body: message
+      }
+    };
+    const user = await admin.firestore().collection('UserTokens').doc(userId).get();
+    console.log('Notification function step 2');
+    console.log(JSON.stringify(user.data()));
+    if(user.exists){
+	    //const tokens = ['eatcl0C1S22opa3bWipbxP:APA91bFfVM6v-wV5Juu1wp1280rx5WQ7t2qnjJxY4D-Yt5UnwyNzW6zHCD4reHHnjz8AOujVilyn8_qyGPLvKVh3FtNURSnAOijQ2gLwO6QrCNnKRsruO4iCbuxwoAHPTF8qQcu6Z6J7'];
+	    const tokens = [user.data().token];
+		console.log('Notification function step 3');
+	    const response = await admin.messaging().sendToDevice(tokens, payload);
+	    console.log('Notification function step 4');
+	    console.log('Notification send: ' +  response);
+	    console.log(JSON.stringify(response));
+	} else{
+		console.log('Notification function step 5');
+	}
+});
 ```
